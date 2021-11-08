@@ -1,1 +1,1 @@
-["Q", "WE", "RTY"], ["WE", "ZZ"]
+print(SUB(["Q", "WE", "RTY"], ["WE", "ZZ"]))

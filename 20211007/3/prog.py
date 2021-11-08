@@ -15,5 +15,5 @@ def Bisect (elem, seq):
     else:
         return False
     
-x, s = eval(input())
-print(Bisect(x, s))
+import sys
+exec(sys.stdin.read())

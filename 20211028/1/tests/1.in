@@ -1,0 +1,1 @@
+print(', '.join(list(map(str, fib(2, 4)))))

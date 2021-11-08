@@ -1,0 +1,1 @@
+print(*list(slide([[1],2,'',[2,3],(1,),None,'nlkjlj'], 3)))

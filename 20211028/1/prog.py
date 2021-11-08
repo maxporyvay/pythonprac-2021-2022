@@ -10,3 +10,6 @@ def fib(m, n):
             return f0
         f0, f1, f2 = f1, f2, f1 + f2
         i += 1
+
+import sys
+exec(sys.stdin.read())

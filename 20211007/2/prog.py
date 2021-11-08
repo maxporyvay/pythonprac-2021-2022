@@ -5,5 +5,6 @@ def SUB(a, b):
         return([x for x in a if x not in b])
     else:
         return a - b
-x,y = eval(input())
-print(SUB(x,y))
+
+import sys
+exec(sys.stdin.read())

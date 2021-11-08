@@ -8,5 +8,6 @@ def Pareto(*lst):
         if not flag:
             l.append(i)
     return tuple(l)
-list_ = eval(input())
-print(Pareto(*list_))
+
+import sys
+exec(sys.stdin.read())
