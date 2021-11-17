@@ -32,3 +32,4 @@ while True:
         print('Not a triangle')
     else:
         print(f'{square:.2f}')
+        break
