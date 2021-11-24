@@ -1,0 +1,9 @@
+class C:
+	num = Num() 
+c, d = C(), C()
+c.num = d.num = [7,8]
+print(c.num+d.num)
+c.num = [i for i in range(3)]
+print(c.num+d.num)
+d.num = ''
+print(c.num+d.num)

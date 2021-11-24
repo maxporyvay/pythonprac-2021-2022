@@ -1,0 +1,14 @@
+class Str(str):
+	def __del__(self):
+		pass
+@objcount
+class MyStr(Str):
+	def __del__(self):
+		print('deleted')
+		super().__del__()
+a = MyStr('a')
+b = MyStr('b')
+print(MyStr.counter)
+del a
+del b
+print(MyStr.counter)

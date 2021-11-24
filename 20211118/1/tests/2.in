@@ -1,0 +1,11 @@
+@objcount
+class Int(int):
+    pass
+a = Int(20)
+print(Int.counter)
+b = a
+print(Int.counter)
+del a
+print(Int.counter)
+del b
+print(Int.counter)

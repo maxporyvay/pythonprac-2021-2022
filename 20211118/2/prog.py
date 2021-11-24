@@ -11,3 +11,6 @@ class Num:
             obj._val = len(val)
     def __delete__(self, obj):
         obj._val = None
+
+import sys
+exec(sys.stdin.read())

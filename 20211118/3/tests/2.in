@@ -1,0 +1,10 @@
+try:
+	alp = Alpha(c=10, z=2, ab=42)
+except AttributeError:
+	print('catched')
+alq = AlphaQ(c=10, z=2, a=42)
+try:
+	alq.E = 123
+except AttributeError:
+	print('catched')
+print(alq)
