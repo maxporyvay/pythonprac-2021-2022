@@ -1,5 +1,11 @@
 import sys
 seq = sys.stdin.buffer.read()
-n = seq[0]
+N = seq[0]
 remains = seq[1:]
-l = len(remains)
+L = len(remains)
+lst = []
+for i in range(N):
+    lst.append(remains[round(i*L/N):round((i+1)*L/N)])
+lst.sort()
+st = seq[0:1] + b''.join(lst)
+sys.stdout.buffer.write(st)
