@@ -1,0 +1,11 @@
+class G(metaclass=dump):
+    def __init__(self, val, val2=10):
+        self.val = val
+        self.val2 = val2
+    def __str__(self):
+        return str(self.val + self.val2)
+		
+g = G(4)
+w = G(2, 6)
+print(g)
+print(w)

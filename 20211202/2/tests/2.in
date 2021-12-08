@@ -1,0 +1,7 @@
+class C(metaclass=check):
+    A: int = 1
+    B: str = "QQ"
+    Dropper: 'duck' = 'ducky'
+	
+c = C()
+print(c.check_annotations())

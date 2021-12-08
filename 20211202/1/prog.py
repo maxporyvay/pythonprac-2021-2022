@@ -1,10 +1,13 @@
 class dump(type):
-    def __init__(self, name, parents, ns):
+    def __new__(cls, name, parents, ns):
         for func in ns:
             if callable(ns[func]):
-                def f(self, *args, **kwargs):
-                    print(ns[func].__name__, args, kwargs)
-                    return ns[func](*args, **kwargs)
+                def f(self, *args, func=ns[func], funcname=func, **kwargs):
+                    print(funcname + ': ' + str(args) + ', ' + str(kwargs))
+                    return func(self, *args, **kwargs)
                 ns[func] = f
-        print(ns)
-        return super().__init__(name, parents, ns)
+                ns[func].__name__ = func
+        return super().__new__(cls, name, parents, ns)
+
+import sys
+exec(sys.stdin.read())

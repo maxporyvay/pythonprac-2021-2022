@@ -1,0 +1,3 @@
+W = dump('W', (), {'methodd':lambda self, x, **kw: x+sum(v for k,v in kw.items())})
+a = W()
+print(a.methodd(5, e=7, u=78))
