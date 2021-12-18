@@ -1,4 +1,6 @@
 def Pareto(*lst):
+    if not isinstance(lst[0], tuple):
+        return lst
     l = []
     for i in lst:
         flag = False
