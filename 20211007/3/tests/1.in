@@ -1,1 +1,1 @@
-print(Bisect("a", "abcdfghklmoprsyz"))
+"a", "abcdfghklmoprsyz"

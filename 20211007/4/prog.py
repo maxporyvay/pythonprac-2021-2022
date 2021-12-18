@@ -7,5 +7,5 @@ def Calc(s, t, u):
         return eval(u, globals(), {'x': a, 'y': b})
     return func
 
-import sys
-exec(sys.stdin.read())
+cort = eval(input())
+print((Calc(*cort))(eval(input())))

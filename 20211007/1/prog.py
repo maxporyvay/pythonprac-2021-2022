@@ -9,5 +9,4 @@ def Pareto(*lst):
             l.append(i)
     return tuple(l)
 
-import sys
-exec(sys.stdin.read())
+print(Pareto(*eval(input())))

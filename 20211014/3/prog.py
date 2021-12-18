@@ -28,7 +28,7 @@ print('#' * (width + 2))
 for i in range(height):
     print('#' + new_mat[i] + '#')
 print('#' * (width + 2))
-water_volume = c * width
+#water_volume = c * width
 gas_volume = height * width - water_volume
 if water_volume > gas_volume:
     waterstr1 = 20 * '~'
@@ -38,6 +38,6 @@ else:
     waterstr1 = round(water_volume / gas_volume * 20) * '.'
 waterstr2 = str(water_volume) + '/' + str(width*height)
 gasstr2 = str(gas_volume) + '/' + str(width*height)
-l = len(max(waterstr2, gasstr2))
+l = len(max([waterstr2, gasstr2], key=lambda x: len(x)))
 print(gasstr1.ljust(20) + ' ' + gasstr2.rjust(l))
 print(waterstr1.ljust(20) + ' ' + waterstr2.rjust(l))
