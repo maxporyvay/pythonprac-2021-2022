@@ -2,4 +2,4 @@
 maxFROMfour 2 0 9 -1
 :uselessFun x y z s sin(x+y)/cos(z-s)
 uselessFun pi/4 pi/4 pi/4 pi/4
-quit "{} ... {}"
+quit "{}...{}"

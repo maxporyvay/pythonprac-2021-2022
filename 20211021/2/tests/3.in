@@ -3,4 +3,4 @@
 add 2 3
 add 4 16
 sub 3 9
-quit "{} functions, {} lines"
+quit "{}_functions,_{}_lines"
