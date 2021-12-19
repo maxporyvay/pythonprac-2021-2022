@@ -34,8 +34,8 @@ if water_volume > gas_volume:
     waterstr1 = 20 * '~'
     gasstr1 = round(gas_volume / water_volume * 20) * '.'
 else:
-    gasstr1 = 20 * '~'
-    waterstr1 = round(water_volume / gas_volume * 20) * '.'
+    gasstr1 = 20 * '.'
+    waterstr1 = round(water_volume / gas_volume * 20) * '~'
 waterstr2 = str(water_volume) + '/' + str(width*height)
 gasstr2 = str(gas_volume) + '/' + str(width*height)
 l = len(max([waterstr2, gasstr2], key=lambda x: len(x)))
