@@ -10,8 +10,6 @@ while (line := input()) != '':
 lst = text.lower().split()
 cntr = dict(Counter(lst))
 dct = {k: v for k,v in cntr.items() if len(k) == w}
-if dct == {}:
-    print()
-else:
+if dct != {}:
     m = dct[max(dct, key=dct.get)]
     print(*sorted([k for k,v in dct.items() if v == m]))
