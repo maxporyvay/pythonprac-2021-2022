@@ -5,6 +5,23 @@ from os.path import basename, dirname
 
 SHIFT = "  "
 
+def viewTree(treeID, shiftcnt):
+    treename_dir, treename_file = treeID[:2], treeID[2:]
+    treename_filepath = '.git/objects/' + treename_dir + '/' + treename_file
+    obj = ''
+    with open(treename_filepath, 'rb') as tf:
+        obj = zlib.decompress(tf.read())
+    header, _, tail = obj.partition(b'\x00')
+    kind, _ = header.split()
+    if kind == b'tree':
+        while tail:
+            treeobj, _, tail = tail.partition(b'\x00')
+            _, tname = treeobj.split()
+            num, tail = tail[:20], tail[20:]
+            num = num.hex()
+            print(SHIFT * shiftcnt + f"{tname.decode()}")
+            viewTree(num, shiftcnt + 1)
+
 if len(sys.argv) == 1:
     for dr in iglob('.git/refs/heads/*'):
         print(basename(dr))
@@ -27,15 +44,6 @@ elif len(sys.argv) > 1:
     else:
         treename, _ = objtext_.split('\nauthor')
     print('tree', treename)
-    treename_dir, treename_file = treename[:2], treename[2:]
-    treename_filepath = '.git/objects/' + treename_dir + '/' + treename_file
-    obj = ''
-    with open(treename_filepath, 'rb') as tf:
-        obj = zlib.decompress(tf.read())
-    _, _, tail = obj.partition(b'\x00')
-    while tail:
-        treeobj, _, tail = tail.partition(b'\x00')
-        tmode, tname = treeobj.split()
-        num, tail = tail[:20], tail[20:]
-        print(f"{SHIFT}{tname.decode()} {tmode.decode()} {num.hex()}")
+    viewTree(treename, 1)
+    
 
