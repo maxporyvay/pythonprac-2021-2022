@@ -5,6 +5,28 @@ from os.path import basename, dirname
 
 SHIFT = "  "
 
+def viewCommitHistory(commitID):
+    commit_name_dir, commit_name_file = commitID[:2], commitID[2:]
+    commit_filepath = '.git/objects/' + commit_name_dir + '/' + commit_name_file
+    obj = ''
+    with open(commit_filepath, 'rb') as cf:
+        obj = zlib.decompress(cf.read())
+    objtext = obj.decode()
+    print(objtext)
+    _, objtext_ = objtext.split('tree ')
+    isInitial = False
+    if 'parent' in objtext:
+        treename, parent = objtext_.split('\nparent ')
+        parentID = parent.split()[0]
+    else:
+        isInitial = True
+        treename, _ = objtext_.split('\nauthor')
+    print('tree', treename)
+    viewTree(treename, 1)
+    print('-' * 80)
+    if not isInitial:
+        viewCommitHistory(parentID)
+
 def viewTree(treeID, shiftcnt):
     treename_dir, treename_file = treeID[:2], treeID[2:]
     treename_filepath = '.git/objects/' + treename_dir + '/' + treename_file
@@ -31,19 +53,7 @@ elif len(sys.argv) > 1:
     commit_name = ''
     with open(branchpath) as bp:
         commit_name = bp.readline().strip()
-    commit_name_dir, commit_name_file = commit_name[:2], commit_name[2:]
-    commit_filepath = '.git/objects/' + commit_name_dir + '/' + commit_name_file
-    obj = ''
-    with open(commit_filepath, 'rb') as cf:
-        obj = zlib.decompress(cf.read())
-    objtext = obj.decode()
-    print(objtext)
-    _, objtext_ = objtext.split('tree ')
-    if 'parent' in objtext:
-        treename, _ = objtext_.split('\nparent')
-    else:
-        treename, _ = objtext_.split('\nauthor')
-    print('tree', treename)
-    viewTree(treename, 1)
+    viewCommitHistory(commit_name)
+    
     
 
