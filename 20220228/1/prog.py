@@ -9,3 +9,5 @@ str1 = input()
 str2 = input()
 assert ' ' not in str1
 assert ' ' not in str2
+
+res = dist(str1, str2)
