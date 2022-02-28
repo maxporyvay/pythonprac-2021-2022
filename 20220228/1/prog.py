@@ -2,7 +2,12 @@ import textdistance
 
 
 def dist(s1, s2, typo):
-    return textdistance.levenshtein(s1, s2)
+    if typo == 'L':
+        return textdistance.levenshtein(s1, s2)
+    elif typo == 'D':
+        return textdistance.damerau_levenshtein(s1, s2)
+    else:
+        return -1
     
 
 str1 = input()
