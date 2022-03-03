@@ -1,4 +1,5 @@
 import textdistance
+import multiprocessing as mp
 
 
 def dist(s1, s2, typo):
@@ -16,4 +17,7 @@ str3 = input()
 assert ' ' not in str1
 assert ' ' not in str2
 
-res = dist(str1, str2, str3)
+pool = mp.Pool(1)
+process = pool.apply_async(dist, (str1, str2, str3))
+res = process.get()
+print(res)
