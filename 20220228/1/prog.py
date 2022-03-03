@@ -19,5 +19,8 @@ assert ' ' not in str2
 
 pool = mp.Pool(1)
 process = pool.apply_async(dist, (str1, str2, str3))
-res = process.get()
+try:
+    res = process.get(timeout=1)
+except mp.context.TimeoutError:
+    res = -1
 print(res)
