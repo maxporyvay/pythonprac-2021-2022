@@ -1,11 +1,19 @@
 import readline
 import shlex
 import cmd
+from random import randint
 
 
 class Repl(cmd.Cmd):
     
     prompt = '>'
+
+    def __init__(self):
+        super(Repl, self).__init__()
+        self.field = [[0 for _ in range(10)] for _ in range(10)]
+        self.player_coords = (randint(0, 9), randint(0, 9))
+        print('player at', *(self.player_coords))
+        self.monsters = {}
 
     def do_attack(self, arg):
         args = shlex.split(arg, comments=True)
