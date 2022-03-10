@@ -20,10 +20,55 @@ class Repl(cmd.Cmd):
         if len(args) < 1:
             return
 
+    def after_move(self):
+        print('player at', *(self.player_coords))
+        flag = False
+        string = ''
+        for name, dct in self.monsters.items():
+            for coords, hp in dct.items():
+                if self.player_coords == coords:
+                    flag = True
+                    string += f' {name} hp {hp},'
+        if flag:
+            print('encountered:', string[:-1], sep='')
+        
+
     def do_move(self, arg):
         args = shlex.split(arg, comments=True)
         if len(args) < 1:
             return
+        else:
+            if len(args) == 1:
+                match(args[0]):
+                    case 'up':
+                        if self.player_coords[1] != 0:
+                            self.player_coords = (self.player_coords[0], self.player_coords[1] - 1)
+                            self.after_move()
+                        else:
+                            print('cannot move')
+                    case 'down':
+                        if self.player_coords[1] != 9:
+                            self.player_coords = (self.player_coords[0], self.player_coords[1] + 1)
+                            self.after_move()
+                        else:
+                            print('cannot move')
+                    case 'left':
+                        if self.player_coords[0] != 0:
+                            self.player_coords = (self.player_coords[0] - 1, self.player_coords[1])
+                            self.after_move()
+                        else:
+                            print('cannot move')
+                    case 'right':
+                        if self.player_coords[0] != 9:
+                            self.player_coords = (self.player_coords[0] + 1, self.player_coords[1])
+                            self.after_move()
+                        else:
+                            print('cannot move')
+                    case _:
+                        print('Failed')
+            else:
+                print('Failed')
+            
 
     def do_show(self, arg):
         args = shlex.split(arg, comments=True)
@@ -64,7 +109,7 @@ class Repl(cmd.Cmd):
         pass
 
     def complete_move(self, text, line, begidx, endidx):
-        pass
+        return [s for s in ['up', 'down', 'left', 'right'] if s.startswith(text)]
     
     def do_exit(self, arg):
         return True
