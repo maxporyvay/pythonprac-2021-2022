@@ -1,7 +1,6 @@
 import readline
 import shlex
 import cmd
-from random import randint
 
 
 class Repl(cmd.Cmd):
@@ -11,14 +10,33 @@ class Repl(cmd.Cmd):
     def __init__(self):
         super(Repl, self).__init__()
         self.field = [[0 for _ in range(10)] for _ in range(10)]
-        self.player_coords = (randint(0, 9), randint(0, 9))
+        self.player_coords = (0, 0)
         print('player at', *(self.player_coords))
         self.monsters = {}
+        print('Please, don\'t use "_" in monsters\' names - use spaces instead')
 
     def do_attack(self, arg):
         args = shlex.split(arg, comments=True)
         if len(args) < 1:
             return
+        else:
+            if len(args) == 1:
+                args[0] = ' '.join(args[0].split('_'))
+                if args[0] in self.monsters and self.player_coords in self.monsters[args[0]]:
+                    hp = self.monsters[args[0]][self.player_coords]
+                    hp -= 10
+                    if hp > 0:
+                        print(f'{args[0]} lost 10 hp, now has {hp} hp')
+                        self.monsters[args[0]][self.player_coords] -= 10
+                    else:
+                        print(f'{args[0]} dies')
+                        self.monsters[args[0]].pop(self.player_coords)
+                        if not self.monsters[args[0]]:
+                            self.monsters.pop(args[0])
+                else:
+                    print(f'no {args[0]} here')
+            else:
+                print('Failed')
 
     def after_move(self):
         print('player at', *(self.player_coords))
@@ -106,7 +124,13 @@ class Repl(cmd.Cmd):
                 print('Failed')
 
     def complete_attack(self, text, line, begidx, endidx):
-        pass
+        if line.count(' ') == 1:
+            ls = []
+            for name, dct in self.monsters.items():
+                for coords, hp in dct.items():
+                    if self.player_coords == coords:
+                        ls.append(name.replace(' ', '_'))
+            return [s for s in ls if s.startswith(text)]
 
     def complete_move(self, text, line, begidx, endidx):
         return [s for s in ['up', 'down', 'left', 'right'] if s.startswith(text)]
