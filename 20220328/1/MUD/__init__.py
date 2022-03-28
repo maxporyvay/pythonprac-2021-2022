@@ -1,6 +1,7 @@
 import readline
 import shlex
 import cmd
+import sys
 
 
 class Repl(cmd.Cmd):
@@ -138,5 +139,8 @@ class Repl(cmd.Cmd):
     def do_exit(self, arg):
         return True
 
-
-Repl().cmdloop()
+def main():
+    Repl().cmdloop()
+        
+if __name__ == '__main__':
+    sys.exit(main())
