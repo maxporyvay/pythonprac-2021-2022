@@ -1,3 +1,5 @@
+"""Модуль __init__ предназначен для работы с командной строкой в MUD."""
+
 import shlex
 import cmd
 import sys
@@ -7,16 +9,19 @@ game = Game()
 
 
 class Repl(cmd.Cmd):
+    """Класс Repl наследует cmd.Cmd и работает как командная строка для MUD."""
 
     prompt = '>'
 
     def __init__(self):
+        """Функция __init__ предназначена для инициализации параметров Repl."""
         super(Repl, self).__init__()
         self.game = game
         print('player at', *(self.game.player_coords))
         print('Please, don\'t use "_" in monsters\' names - use spaces instead')
 
     def do_attack(self, arg):
+        """Функция do_attack предназначена для реализации атаки монстра игроком."""
         args = shlex.split(arg, comments=True)
         if len(args) < 1:
             return
@@ -38,6 +43,7 @@ class Repl(cmd.Cmd):
                 print('Failed')
 
     def after_move(self):
+        """Функция after_move предназначена для возможного вывода списка монстров в новой клетке после перемещения игрока."""
         print('player at', *(self.game.player_coords))
         flag = False
         string = ''
@@ -49,6 +55,7 @@ class Repl(cmd.Cmd):
             print('encountered:', string[:-1], sep='')
 
     def do_move(self, arg):
+        """Функция do_move предназначена для реализации перемещения игрока."""
         args = shlex.split(arg, comments=True)
         if len(args) < 1:
             return
@@ -85,6 +92,7 @@ class Repl(cmd.Cmd):
                 print('Failed')
 
     def do_show(self, arg):
+        """Функция do_show предназначена для вывода всех монстров в конкретный игровой момент времени."""
         args = shlex.split(arg, comments=True)
         if len(args) < 1:
             return
@@ -96,6 +104,7 @@ class Repl(cmd.Cmd):
                 print('Failed')
 
     def do_add(self, arg):
+        """Функция do_add предназначена для реализации возможности добавления нового монстра."""
         args = shlex.split(arg, comments=True)
         if len(args) < 1:
             return
@@ -116,6 +125,7 @@ class Repl(cmd.Cmd):
                 print('Failed')
 
     def complete_attack(self, text, line, begidx, endidx):
+        """Функция complete_attack предназначена для автодополнения attack."""
         if line.count(' ') == 1:
             ls = []
             for monster in self.game.monsters:
@@ -124,13 +134,16 @@ class Repl(cmd.Cmd):
             return [s for s in ls if s.startswith(text)]
 
     def complete_move(self, text, line, begidx, endidx):
+        """Функция complete_move предназначена для автодополнения move."""
         return [s for s in ['up', 'down', 'left', 'right'] if s.startswith(text)]
 
     def do_exit(self, arg):
+        """Функция do_exit предназначена для завершения игры MUD."""
         return True
 
 
 def main():
+    """Функция main предназначена для обеспечения возможности запуска MUD как пакета."""
     Repl().cmdloop(game)
 
 

@@ -1,3 +1,5 @@
+"""Модуль __main__ предназначен для запуска MUD как пакета."""
+
 import sys
 
 from MUD import main
