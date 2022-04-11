@@ -3,3 +3,4 @@ patchdir
 .flake8
 make.bat
 Makefile
+*.pot
