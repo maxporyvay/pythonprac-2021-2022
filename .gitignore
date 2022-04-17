@@ -4,3 +4,4 @@ patchdir
 make.bat
 Makefile
 *.pot
+*.mo
