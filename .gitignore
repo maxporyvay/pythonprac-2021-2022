@@ -5,3 +5,5 @@ make.bat
 Makefile
 *.pot
 *.mo
+proj
+*.db
