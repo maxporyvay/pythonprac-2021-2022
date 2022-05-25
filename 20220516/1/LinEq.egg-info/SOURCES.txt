@@ -1,0 +1,14 @@
+MANIFEST.in
+dodo.py
+pyproject.toml
+setup.cfg
+test_lineq.py
+LinEq/__init__.py
+LinEq/__main__.py
+LinEq.egg-info/PKG-INFO
+LinEq.egg-info/SOURCES.txt
+LinEq.egg-info/dependency_links.txt
+LinEq.egg-info/requires.txt
+LinEq.egg-info/top_level.txt
+LinEq/po/ru/LC_MESSAGES/lineq.mo
+LinEq/po/ru/LC_MESSAGES/lineq.po
